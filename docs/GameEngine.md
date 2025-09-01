@@ -30,9 +30,6 @@ Initializes a new game with:
 def get_initial_board(self):
 ```
 Creates and returns the initial board setup:
-- Back rank (white): Knight, Bishop, King, Knight
-- Second rank: Four pawns
-- Similar setup for black on opposite side
 
 ```python
 def make_move(self, move):
