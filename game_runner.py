@@ -1,7 +1,7 @@
 import time
 from board import GameEngine, Move
-from player3 import AggressivePlayer
-from player1 import StandardPlayer
+from p22cs201 import P22CS201
+from p25cs0004 import P25CS0004
 from config import *
 
 PIECE_SYMBOLS = {
@@ -140,8 +140,8 @@ def run_game(white_player_type, black_player_type, total_time_seconds=60):
     print("\n" + "="*15, "GAME OVER", "="*15)
     
     final_game_state = engine.get_game_state()
-    final_score = white_player.evaluate_board(final_game_state)
-    print(f"\nFinal Score (White's perspective): {final_score:.2f}")
+    # final_score = white_player.evaluate_board(final_game_state)
+    # print(f"\nFinal Score (White's perspective): {final_score:.2f}")
 
     if final_game_state == "checkmate":
         winner = '<Black>' if engine.white_to_move else '<White>'
@@ -166,6 +166,6 @@ def run_game(white_player_type, black_player_type, total_time_seconds=60):
     print(f"Flags: White={white_flag}, Black={black_flag}")
 
 if __name__ == "__main__":
-    run_game(white_player_type=StandardPlayer, black_player_type=AggressivePlayer, total_time_seconds=60)
+    run_game(white_player_type=P25CS0004, black_player_type=P22CS201, total_time_seconds=60)
 
 ## Replace by your AI agents for test purposes. Note you only have to submit one AI agent.
