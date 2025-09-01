@@ -74,25 +74,29 @@ The default configuration runs a 60-second bullet game between StandardPlayer an
 
 ## AI Development
 
-To create a new AI player:
-1. Create a new class inheriting from `AIPlayer`
-2. Implement `get_best_move()` and `evaluate_board()`
-3. Set appropriate search depth
+The project provides an `AIPlayer` template class in `ai_player.py`. To create your AI implementation:
 
-Example:
+1. Complete the provided `AIPlayer` class by implementing:
+   - `get_best_move()`: Add your move selection logic
+   - `evaluate_board()`: Add your board evaluation strategy
+2. Adjust the `depth` parameter in `__init__` as needed for your search algorithm
+3. You can add additional helper methods to support your implementation
+
+The template includes:
 ```python
-class MyAIPlayer(AIPlayer):
-    def __init__(self, board):
-        super().__init__(board)
-        self.depth = 1  # Set search depth
+def get_best_move(self):
+    """
+    Calculates and returns the best move for the current board state.
+    This method must be implemented.
+    """
+    # Add your move selection logic here
 
-    def get_best_move(self):
-        # Implement move selection logic
-        pass
-
-    def evaluate_board(self):
-        # Implement board evaluation
-        pass
+def evaluate_board(self):
+    """
+    Returns a heuristic score for the current board state.
+    This method must be implemented.
+    """
+    # Add your board evaluation strategy here
 ```
 
 
