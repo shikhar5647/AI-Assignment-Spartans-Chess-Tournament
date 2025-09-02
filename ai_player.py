@@ -29,12 +29,13 @@ class AIPlayer:
         """
         raise NotImplementedError("classes must implement the evaluate_board method.")
 
-############################################################################
+##############################################################################################################
 
 
 
-## Feel free to add any additional helper methods or properties you need.
+## Feel free to add any additional helper methods or properties you need and use them in the above methods,
+## as we will call the above two fucntions only.
 
 
 
-#############################################################################
+################################################################################################################
