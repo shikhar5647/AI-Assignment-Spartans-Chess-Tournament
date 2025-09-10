@@ -147,9 +147,9 @@ def run_game(white_player_type, black_player_type, total_time_seconds=60):
         winner = '<Black>' if engine.white_to_move else '<White>'
         print(f"\nCheckmate! {winner} wins.")
         if engine.white_to_move:
-             black_log.append("Win by Checkmate (+300)"); black_points += 300
+             black_log.append("Win by Checkmate (+600)"); black_points += 600
         else:
-             white_log.append("Win by Checkmate (+300)"); white_points += 300
+             white_log.append("Win by Checkmate (+600)"); white_points += 600
     elif final_game_state == "stalemate":
         print("\nStalemate! It's a draw.")
     elif not game_over:
