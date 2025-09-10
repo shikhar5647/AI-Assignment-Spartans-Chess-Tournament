@@ -22,8 +22,8 @@ PIECE_VALUES = {
     BLACK_KNIGHT: -70,
     WHITE_BISHOP: 70,
     BLACK_BISHOP: -70,
-    WHITE_KING: 300,
-    BLACK_KING: -300
+    WHITE_KING: 600,
+    BLACK_KING: -600
 }
 
 # Piece-Square Tables (PST) for positional evaluation
