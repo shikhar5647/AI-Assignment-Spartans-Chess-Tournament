@@ -71,7 +71,7 @@ def run_game(white_player_type, black_player_type, total_time_seconds=60):
     rank_map = {i: str(8 - i) for i in range(BOARD_HEIGHT)}
 
     game_over = False
-    while not game_over and turn_counter < 150:
+    while not game_over and turn_counter < 300:
         player = white_player if engine.white_to_move else black_player
         color = '<White>' if engine.white_to_move else '<Black>'
         
