@@ -4,7 +4,7 @@ import time
 from config import *
 from board import Board
 
-class AIPlayer:
+class B22CH032:
     """
     class for an AI player. Defines the common interface that all AI
     implementations must follow.
