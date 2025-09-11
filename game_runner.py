@@ -1,16 +1,10 @@
 import time
 from board import GameEngine, Move
-from .P22CS201 import P22CS201
-from .P25CS0004 import P25CS0004
-from .B22CH032 import B22CH032
-from .B22EE088 import B22EE088
+from B22CH032 import B22CH032
+from B22EE088 import B22EE088
 from config import *
 
-PIECE_SYMBOLS = {
-    'wP': '♟', 'bP': '♙', 'wN': '♞', 'bN': '♘',
-    'wB': '♝', 'bB': '♗', 'wK': '♚', 'bK': '♔',
-    EMPTY_SQUARE: ' '
-}
+# PIECE_SYMBOLS is imported from config.py
 
 class PlayerClock:
     """Manages the time for a blitz game."""
@@ -168,6 +162,6 @@ def run_game(white_player_type, black_player_type, total_time_seconds=60):
     print(f"Flags: White={white_flag}, Black={black_flag}")
 
 if __name__ == "__main__":
-    run_game(white_player_type=P25CS0004, black_player_type=P22CS201, total_time_seconds=60)
+    run_game(white_player_type=B22CH032, black_player_type=B22EE088, total_time_seconds=60)
 
 ## Replace by your AI agents for test purposes. Note you only have to submit one AI agent.

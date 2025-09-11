@@ -2,7 +2,7 @@ import sys
 import copy
 import time
 from config import *
-from board import Board, Move
+from board import GameEngine, Move
 
 class B22CH032:
     """
@@ -11,8 +11,8 @@ class B22CH032:
     positional bonuses, and tactical considerations.
     """
     
-    def __init__(self, board):
-        self.board = board
+    def __init__(self, engine):
+        self.board = engine
         self.nodes_expanded = 0
         self.depth = 4  # Optimal depth for 60-second games
         self.start_time = 0
