@@ -2,6 +2,8 @@ import time
 from board import GameEngine, Move
 from .P22CS201 import P22CS201
 from .P25CS0004 import P25CS0004
+from .B22CH032 import B22CH032
+from .B22EE088 import B22EE088
 from config import *
 
 PIECE_SYMBOLS = {
