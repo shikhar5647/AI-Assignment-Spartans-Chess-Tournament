@@ -2,7 +2,7 @@ import math
 from config import *
 from board import Move
 
-class AIPlayer:
+class B22EE088:
     """
     AI Player with minimax + alpha-beta pruning.
     """
