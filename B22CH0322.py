@@ -4,7 +4,7 @@ import time
 from config import *
 from board import Board, Move
 
-class B22CH032:
+class B22CH0322:
     """
     AI player using Minimax algorithm with Alpha-Beta pruning.
     Simplified version with basic evaluation and essential optimizations.
