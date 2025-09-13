@@ -7,7 +7,7 @@ class B22CS043:
     """
     A minimax-based agent with alpha-beta pruning.
     """
-    def _init_(self, engine):
+    def __init__(self, engine):
         self.engine = engine
         self.nodes_expanded = 0
         self.depth = 5

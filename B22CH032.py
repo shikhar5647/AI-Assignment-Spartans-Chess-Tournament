@@ -7,7 +7,6 @@ from board import Move
 class B22CH032:
     """
     AI player using Minimax algorithm with Alpha-Beta pruning.
-    Simplified version with basic evaluation and essential optimizations.
     """
     
     def __init__(self, board):
