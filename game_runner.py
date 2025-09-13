@@ -4,6 +4,7 @@ from B22CH032 import B22CH032
 from B22EE088 import B22EE088
 from B22CS043 import B22CS043
 from B22CH0322 import B22CH0322
+from B22CS061_0 import B22CS061
 from config import *
 
 # PIECE_SYMBOLS is imported from config.py
@@ -164,6 +165,6 @@ def run_game(white_player_type, black_player_type, total_time_seconds=60):
     print(f"Flags: White={white_flag}, Black={black_flag}")
 
 if __name__ == "__main__":
-    run_game(white_player_type=B22EE088, black_player_type=B22CH0322, total_time_seconds=60)
+    run_game(white_player_type=B22CH0322, black_player_type=B22CS061, total_time_seconds=60)
 
 ## Replace by your AI agents for test purposes. Note you only have to submit one AI agent.
