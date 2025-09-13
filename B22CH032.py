@@ -8,16 +8,13 @@ class B22CH032:
     """
     AI player using Minimax algorithm with Alpha-Beta pruning.
     """
-    
     def __init__(self, board):
         self.board = board
         self.nodes_expanded = 0
-        self.depth = 4  # Search depth
+        self.depth = 4  
         self.is_white = None  # Will be determined during first move
-        
         # Transposition table for memoization
         self.transposition_table = {}
-        
         # Move ordering helpers
         self.killer_moves = [[] for _ in range(10)]  # Store killer moves per depth
     
@@ -67,12 +64,10 @@ class B22CH032:
         Minimax algorithm with Alpha-Beta pruning.
         """
         self.nodes_expanded += 1
-        
         # Terminal conditions
         game_state = self.board.get_game_state()
         if depth == 0 or game_state != "ongoing":
             return self.evaluate_board()
-        
         # Check transposition table
         board_hash = self._get_board_hash()
         if board_hash in self.transposition_table:
@@ -131,7 +126,6 @@ class B22CH032:
     def _order_moves(self, moves):
         """
         Order moves for better Alpha-Beta pruning efficiency.
-        Priority: captures, checks, killer moves.
         """
         scored_moves = []
         
@@ -171,21 +165,22 @@ class B22CH032:
         
         # Handle terminal positions
         if game_state == "checkmate":
-            # If it's our turn and we're in checkmate, it's bad for us
             return -99999 if self.board.white_to_move == self.is_white else 99999
         elif game_state == "stalemate":
             return 0
         
         score = 0
+        piece_count = 0
         
-        # 1. Material evaluation - most important factor
+        # Count total pieces for endgame detection
         for row in self.board.board:
             for piece in row:
                 if piece != EMPTY_SQUARE:
-                    piece_value = PIECE_VALUES.get(piece, 0)
-                    score += piece_value
+                    piece_count += 1
         
-        # 2. Positional bonuses
+        is_endgame = piece_count <= 8 
+        
+        # Combined material and positional evaluation using PSTs
         for r in range(BOARD_HEIGHT):
             for c in range(BOARD_WIDTH):
                 piece = self.board.board[r][c]
@@ -195,28 +190,31 @@ class B22CH032:
                 piece_type = piece[1]
                 is_white_piece = piece.startswith('w')
                 
-                # Pawn advancement bonus
+                # 1. Material value
+                piece_value = PIECE_VALUES.get(piece, 0)
+                score += piece_value
+                
+                pst_value = 0
+                
                 if piece_type == 'P':
-                    if is_white_piece:
-                        score += (6 - r) * 2  # Reward advancing pawns
+                    pst_value = PAWN_PST[r][c]
+                elif piece_type == 'N':
+                    pst_value = KNIGHT_PST[r][c]
+                elif piece_type == 'B':
+                    pst_value = BISHOP_PST[r][c]
+                elif piece_type == 'K':
+                    if is_endgame:
+                        # Use endgame king table for better king activity
+                        pst_value = KING_PST_LATE_GAME[r][c]
                     else:
-                        score -= (r - 1) * 2
+                        # In opening/middlegame, prefer king safety (negative values for advanced positions)
+                        pst_value = -KING_PST_LATE_GAME[r][c]
                 
-                # Center control bonus
-                if r in [3, 4] and c in [1, 2]:  # Center squares
-                    if is_white_piece:
-                        score += 10
-                    else:
-                        score -= 10
-                
-                # King safety - penalize advanced kings in early/mid game
-                if piece_type == 'K':
-                    piece_count = sum(1 for row in self.board.board for p in row if p != EMPTY_SQUARE)
-                    if piece_count > 8:  # Not endgame
-                        if is_white_piece and r < 6:
-                            score -= 20
-                        elif not is_white_piece and r > 1:
-                            score += 20
+                # Apply PST value with correct sign for piece color
+                if is_white_piece:
+                    score += pst_value
+                else:
+                    score -= pst_value
         
         # 3. Mobility bonus - reward having more moves
         current_moves = len(self.board.get_legal_moves())
@@ -232,8 +230,17 @@ class B22CH032:
         else:
             score -= mobility_bonus
         
-        # 4. CRITICAL FIX: Adjust score based on our color
-        # If we're playing as Black, we want negative scores to be good for us
+        # 4. For controlling the centre region . 
+        center_squares = [(3, 1), (3, 2), (4, 1), (4, 2)]
+        for r, c in center_squares:
+            piece = self.board.board[r][c]
+            if piece != EMPTY_SQUARE:
+                if piece.startswith('w'):
+                    score += 15
+                else:
+                    score -= 15
+        
+        # 5. Adjusting the score based on player's color
         if not self.is_white:
             score = -score
         
