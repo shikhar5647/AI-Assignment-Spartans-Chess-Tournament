@@ -2,7 +2,7 @@ import sys
 import copy
 import time
 from config import *
-from board import Board, Move
+from board import Move
 
 class B22CH0322:
     """
